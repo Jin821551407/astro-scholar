@@ -26,7 +26,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "deploy": "astro build && gh-pages -d dist -b gh-pages"
+    "deploy": "astro build && npx gh-pages -d dist -b gh-pages --dotfiles --dotfiles"
   },
   "dependencies": {
     "astro": "^6.1.9"
