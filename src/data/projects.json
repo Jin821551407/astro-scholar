@@ -1,0 +1,98 @@
+[
+  {
+    "id": 1,
+    "title": "astro-scholar",
+    "authors": "独立开发",
+    "journal": "Astro · TypeScript · GitHub Pages",
+    "year": 2026,
+    "link": "https://github.com/jin821551407/astro-scholar",
+    "authorship": "first",
+    "abstract": "基于 Astro 构建的个人博客模板，支持项目展示、技术分享、Markdown 博客与 GitHub Pages 部署。从学术站点模板改造为程序员博客，保留筛选、暗色模式等交互能力。",
+    "doi": "",
+    "publicationType": "Open Source"
+  },
+  {
+    "id": 2,
+    "title": "dev-notes-cli",
+    "authors": "独立开发",
+    "journal": "Node.js · TypeScript · Commander",
+    "year": 2025,
+    "link": "https://github.com/jin821551407/dev-notes-cli",
+    "authorship": "first",
+    "abstract": "命令行笔记工具，支持快速记录、标签检索与 Markdown 导出。面向开发者日常碎片想法的轻量解决方案，零配置即可在终端使用。",
+    "doi": "",
+    "publicationType": "Tool"
+  },
+  {
+    "id": 3,
+    "title": "snippet-vault",
+    "authors": "核心开发",
+    "journal": "Vue 3 · Vite · IndexedDB",
+    "year": 2025,
+    "link": "https://github.com/jin821551407/snippet-vault",
+    "authorship": "first",
+    "abstract": "本地优先的代码片段管理器，按语言与标签组织常用代码块，支持全文搜索与一键复制。数据存储在浏览器 IndexedDB，无需后端。",
+    "doi": "",
+    "publicationType": "Personal"
+  },
+  {
+    "id": 4,
+    "title": "api-mock-studio",
+    "authors": "协作开发",
+    "journal": "React · Express · OpenAPI",
+    "year": 2024,
+    "link": "https://github.com/jin821551407/api-mock-studio",
+    "authorship": "other",
+    "abstract": "可视化 Mock API 工作台，从 OpenAPI 规范自动生成接口响应，支持延迟模拟与动态数据填充，方便前后端并行开发。",
+    "doi": "",
+    "publicationType": "Open Source"
+  },
+  {
+    "id": 5,
+    "title": "deploy-watch",
+    "authors": "独立开发",
+    "journal": "Go · GitHub Actions · Docker",
+    "year": 2024,
+    "link": "https://github.com/jin821551407/deploy-watch",
+    "authorship": "first",
+    "abstract": "CI/CD 部署状态监控面板，聚合 GitHub Actions 运行结果，支持 Webhook 通知与失败日志快速跳转，减少在多仓库间切换的成本。",
+    "doi": "",
+    "publicationType": "Tool"
+  },
+  {
+    "id": 6,
+    "title": "team-knowledge-base",
+    "authors": "技术负责人",
+    "journal": "Next.js · PostgreSQL · Tailwind",
+    "year": 2023,
+    "link": "",
+    "authorship": "first",
+    "abstract": "团队内部知识库系统，支持 Markdown 文档、全文搜索与权限分级。负责架构设计与核心模块开发，服务 30+ 人研发团队日常使用。",
+    "doi": "",
+    "publicationType": "Work"
+  },
+  {
+    "id": 7,
+    "title": "json-diff-viewer",
+    "authors": "协作开发",
+    "journal": "TypeScript · Web Components",
+    "year": 2023,
+    "link": "https://github.com/jin821551407/json-diff-viewer",
+    "authorship": "other",
+    "abstract": "树形 JSON 差异对比组件，高亮新增、删除与修改字段，可嵌入任意前端项目。处理大体积 JSON 时采用虚拟滚动优化性能。",
+    "doi": "",
+    "publicationType": "Open Source"
+  },
+  {
+    "id": 8,
+    "title": "habit-tracker-pwa",
+    "authors": "独立开发",
+    "journal": "Svelte · PWA · LocalStorage",
+    "year": 2022,
+    "link": "https://github.com/jin821551407/habit-tracker-pwa",
+    "authorship": "first",
+    "abstract": "轻量习惯打卡 PWA，离线可用，支持自定义周期与 streak 统计。练习 Service Worker 缓存策略与移动端适配的首个完整 side project。",
+    "doi": "",
+    "publicationType": "Personal"
+  }
+]

@@ -22,7 +22,7 @@ const sorted: Post[] = Object.entries(postFiles)
 const allTags = [...new Set(sorted.flatMap(p => p.tags ?? []))].sort();
 
 function formatDate(dateStr: string) {
-    return new Date(dateStr).toLocaleDateString('en-GB', {
+    return new Date(dateStr).toLocaleDateString('zh-CN', {
         day: 'numeric',
         month: 'long',
         year: 'numeric',
@@ -30,17 +30,17 @@ function formatDate(dateStr: string) {
 }
 ---
 
-<Layout pageTitle="Blog">
+<Layout pageTitle="博客">
     <div class="page-container">
-        <h1>Blog</h1>
+        <h1>博客</h1>
 
         <p class="intro-text">
-            Occasional writing on field work and the experience of studying things
-            that most institutions would prefer you not study. Non peer-reviewed opinions only.
+            记录开发笔记、踩坑总结与偶尔的技术思考。
+            主题涵盖前端工程化、开源项目与工具链实践。
         </p>
 
         <div class="blog-tag-filters">
-            <button class="blog-tag-btn active" data-tag="all">All</button>
+            <button class="blog-tag-btn active" data-tag="all">全部</button>
             {allTags.map(tag => (
                 <button class="blog-tag-btn" data-tag={tag}>{tag}</button>
             ))}

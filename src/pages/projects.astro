@@ -1,98 +1,96 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { SITE_DATA } from '../constants';
-import publicationsData from '../data/publications.json';
+import projectsData from '../data/projects.json';
 
 import '../styles/publications.css';
 
-// Extract years for filters
-const years = [...new Set(publicationsData.map(pub => pub.year))].sort((a, b) => b - a);
+const years = [...new Set(projectsData.map(p => p.year))].sort((a, b) => b - a);
 const minYear = Math.min(...years);
 const maxYear = Math.max(...years);
 
-// Extract unique publication types
-const publicationTypes = [...new Set(publicationsData.map(pub => pub.publicationType).filter(Boolean))];
+const projectTypes = [...new Set(projectsData.map(p => p.publicationType).filter(Boolean))];
+
+const typeLabels: Record<string, string> = {
+    'Open Source': '开源',
+    Personal: '个人',
+    Work: '工作',
+    Tool: '工具',
+};
+const typeLabel = (type: string) => typeLabels[type] ?? type;
 ---
 
-<Layout pageTitle="Publications">
+<Layout pageTitle="项目">
     <div class="page-container">
-        <h1>Publications</h1>
+        <h1>项目</h1>
 
         <div class="info-card">
             <p>
-                For an up-to-date list of my peer-reviewed publications and preprints, see:
+                更多开源代码与 side project，欢迎访问我的 GitHub：
             </p>
-            <a href={`https://scholar.google.com/citations?user=${SITE_DATA.scholar}`}
+            <a href={`https://github.com/${SITE_DATA.github}`}
                class="info-card-link"
                target="_blank"
                rel="noopener noreferrer"
-               aria-label="Visit Google Scholar profile">
+               aria-label="访问 GitHub 主页">
                 <svg viewBox="0 0 24 24" width="60" height="60" fill="currentColor">
-                    <path d="M12 2L1 7l11 5 9-4.09V17h2V7L12 2z"></path>
-                    <path d="M19 11v6c0 1.66-3.13 3-7 3s-7-1.34-7-3v-6l7 3 7-3z"></path>
+                    <path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.604-3.369-1.342-3.369-1.342-.454-1.154-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.579.688.481C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"></path>
                 </svg>
-                <span>Google Scholar</span>
+                <span>GitHub</span>
             </a>
         </div>
 
         <div class="publications-section">
-            <!-- Controls -->
             <div class="controls-wrapper">
-                <button class="controls-toggle-btn" id="controls-toggle" aria-expanded="false" aria-label="Toggle filters">
-                    <span class="toggle-label">Filters</span>
+                <button class="controls-toggle-btn" id="controls-toggle" aria-expanded="false" aria-label="切换筛选">
+                    <span class="toggle-label">筛选</span>
                     <svg class="toggle-arrow" viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
                         <path d="M7 10l5 5 5-5z"/>
                     </svg>
                 </button>
                 <div class="controls-container collapsed" id="controls-container">
-                <!-- Search -->
                 <div class="control-section">
-                    <label class="section-label">Search</label>
+                    <label class="section-label">搜索</label>
                     <input
                         type="text"
                         id="search-input"
                         class="search-input"
-                        placeholder="Keywords (comma-separated)"
+                        placeholder="关键词（逗号分隔）"
                     />
                 </div>
 
-                <!-- Filters Row -->
                 <div class="filters-row">
-                    <!-- Sort -->
                     <div class="control-section">
-                        <label class="section-label">Sort</label>
+                        <label class="section-label">排序</label>
                         <div class="sort-buttons">
-                            <button class="sort-btn active" data-sort="year-desc">Newest</button>
-                            <button class="sort-btn" data-sort="year-asc">Oldest</button>
-                            <button class="sort-btn" data-sort="title">A-Z</button>
+                            <button class="sort-btn active" data-sort="year-desc">最新</button>
+                            <button class="sort-btn" data-sort="year-asc">最早</button>
+                            <button class="sort-btn" data-sort="title">按名称</button>
                         </div>
                     </div>
 
-                    <!-- Authorship -->
                     <div class="control-section">
-                        <label class="section-label">Authorship</label>
+                        <label class="section-label">参与角色</label>
                         <div class="authorship-filters">
-                            <button class="filter-chip active" data-authorship="all">All</button>
-                            <button class="filter-chip" data-authorship="lead">First/Last</button>
-                            <button class="filter-chip" data-authorship="other">Co</button>
+                            <button class="filter-chip active" data-authorship="all">全部</button>
+                            <button class="filter-chip" data-authorship="lead">独立/主导</button>
+                            <button class="filter-chip" data-authorship="other">协作</button>
                         </div>
                     </div>
 
-                    <!-- Publication Type -->
                     <div class="control-section">
-                        <label class="section-label">Type</label>
+                        <label class="section-label">类型</label>
                         <div class="type-filters">
-                            <button class="filter-chip active" data-type="all">All</button>
-                            {publicationTypes.map(type => (
-                                <button class="filter-chip" data-type={type}>{type}</button>
+                            <button class="filter-chip active" data-type="all">全部</button>
+                            {projectTypes.map(type => (
+                                <button class="filter-chip" data-type={type}>{typeLabel(type)}</button>
                             ))}
                         </div>
                     </div>
                 </div>
 
-                <!-- Year Range -->
                 <div class="control-section">
-                    <label class="section-label">Year Range</label>
+                    <label class="section-label">年份范围</label>
                     <div class="year-slider-container">
                         <input type="range" id="year-min" class="year-slider" min={minYear} max={maxYear} value={minYear} />
                         <input type="range" id="year-max" class="year-slider" min={minYear} max={maxYear} value={maxYear} />
@@ -106,48 +104,50 @@ const publicationTypes = [...new Set(publicationsData.map(pub => pub.publication
                 </div>
             </div>
 
-            <!-- Results Count -->
             <div class="results-info">
-                Showing <span id="results-count">{publicationsData.length}</span> of {publicationsData.length} publications
+                显示 <span id="results-count">{projectsData.length}</span> / 共 {projectsData.length} 个项目
             </div>
 
-            <!-- Publications List -->
             <div class="publications-list" id="publications-list">
-                {publicationsData.map((pub, index) => (
+                {projectsData.map((project, index) => (
                     <article
-                        class={`publication-card ${pub.abstract ? 'has-abstract' : ''}`}
-                        data-pub-id={pub.id}
-                        data-year={pub.year}
-                        data-title={pub.title.toLowerCase()}
-                        data-authors={pub.authors.toLowerCase()}
-                        data-journal={pub.journal.toLowerCase()}
-                        data-authorship={pub.authorship}
-                        data-abstract={pub.abstract.toLowerCase()}
-                        data-type={pub.publicationType}
+                        class={`publication-card ${project.abstract ? 'has-abstract' : ''}`}
+                        data-pub-id={project.id}
+                        data-year={project.year}
+                        data-title={project.title.toLowerCase()}
+                        data-authors={project.authors.toLowerCase()}
+                        data-journal={project.journal.toLowerCase()}
+                        data-authorship={project.authorship}
+                        data-abstract={project.abstract.toLowerCase()}
+                        data-type={project.publicationType}
                         style={`--delay: ${Math.min(index * 0.02, 0.6)}s`}
                     >
                         <div class="pub-number">{index + 1}</div>
                         <div class="pub-content">
                             <h3 class="pub-title">
-                                <a href={pub.link} target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">
-                                    {pub.title}
-                                </a>
-                            </h3>
-                            <p class="pub-authors">{pub.authors}</p>
-                            <div class="pub-meta">
-                                <span class="pub-journal">{pub.journal}</span>
-                                <span class="pub-year">{pub.year}</span>
-                                {pub.publicationType && (
-                                    <span class="pub-type">{pub.publicationType}</span>
+                                {project.link ? (
+                                    <a href={project.link} target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">
+                                        {project.title}
+                                    </a>
+                                ) : (
+                                    <span>{project.title}</span>
                                 )}
-                                {pub.doi && (
-                                    <a href={`https://doi.org/${pub.doi}`} class="pub-doi" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">
-                                        DOI
+                            </h3>
+                            <p class="pub-authors">{project.authors}</p>
+                            <div class="pub-meta">
+                                <span class="pub-journal">{project.journal}</span>
+                                <span class="pub-year">{project.year}</span>
+                                {project.publicationType && (
+                                    <span class="pub-type">{typeLabel(project.publicationType)}</span>
+                                )}
+                                {project.link && (
+                                    <a href={project.link} class="pub-doi" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">
+                                        源码
                                     </a>
                                 )}
                             </div>
-                            {pub.abstract && (
-                                <div class="pub-abstract">{pub.abstract}</div>
+                            {project.abstract && (
+                                <div class="pub-abstract">{project.abstract}</div>
                             )}
                         </div>
                     </article>
@@ -158,7 +158,6 @@ const publicationTypes = [...new Set(publicationsData.map(pub => pub.publication
 </Layout>
 
 <script>
-    // Publications data for client-side filtering
     const publicationsData = document.querySelectorAll('.publication-card');
     let currentSort = 'year-desc';
     let currentAuthorship = 'all';
@@ -167,7 +166,6 @@ const publicationTypes = [...new Set(publicationsData.map(pub => pub.publication
     let yearMin = parseInt(document.getElementById('year-min').getAttribute('min'));
     let yearMax = parseInt(document.getElementById('year-max').getAttribute('max'));
 
-    // Search functionality - comma-separated keywords
     const searchInput = document.getElementById('search-input');
     searchInput.addEventListener('input', (e) => {
         const value = e.target.value.toLowerCase().trim();
@@ -175,7 +173,6 @@ const publicationTypes = [...new Set(publicationsData.map(pub => pub.publication
         filterAndSort();
     });
 
-    // Sort functionality
     document.querySelectorAll('.sort-btn').forEach(btn => {
         btn.addEventListener('click', () => {
             document.querySelectorAll('.sort-btn').forEach(b => b.classList.remove('active'));
@@ -185,7 +182,6 @@ const publicationTypes = [...new Set(publicationsData.map(pub => pub.publication
         });
     });
 
-    // Authorship filter
     document.querySelectorAll('.authorship-filters .filter-chip').forEach(chip => {
         chip.addEventListener('click', () => {
             document.querySelectorAll('.authorship-filters .filter-chip').forEach(c => c.classList.remove('active'));
@@ -195,7 +191,6 @@ const publicationTypes = [...new Set(publicationsData.map(pub => pub.publication
         });
     });
 
-    // Publication type filter
     document.querySelectorAll('.type-filters .filter-chip').forEach(chip => {
         chip.addEventListener('click', () => {
             document.querySelectorAll('.type-filters .filter-chip').forEach(c => c.classList.remove('active'));
@@ -205,13 +200,11 @@ const publicationTypes = [...new Set(publicationsData.map(pub => pub.publication
         });
     });
 
-    // Year range sliders with proper z-index handling
     const yearMinSlider = document.getElementById('year-min');
     const yearMaxSlider = document.getElementById('year-max');
     const yearMinLabel = document.getElementById('year-min-label');
     const yearMaxLabel = document.getElementById('year-max-label');
 
-    // Update z-index based on slider positions to prevent overlap issues
     function updateSliderZIndex() {
         if (yearMin === yearMax) {
             yearMinSlider.style.zIndex = '4';
@@ -222,33 +215,20 @@ const publicationTypes = [...new Set(publicationsData.map(pub => pub.publication
         }
     }
 
-    yearMinSlider.addEventListener('mousedown', () => {
-        yearMinSlider.style.zIndex = '5';
-    });
-
-    yearMinSlider.addEventListener('mouseup', () => {
-        updateSliderZIndex();
-    });
-
-    yearMaxSlider.addEventListener('mousedown', () => {
-        yearMaxSlider.style.zIndex = '5';
-    });
-
-    yearMaxSlider.addEventListener('mouseup', () => {
-        updateSliderZIndex();
-    });
+    yearMinSlider.addEventListener('mousedown', () => { yearMinSlider.style.zIndex = '5'; });
+    yearMinSlider.addEventListener('mouseup', () => { updateSliderZIndex(); });
+    yearMaxSlider.addEventListener('mousedown', () => { yearMaxSlider.style.zIndex = '5'; });
+    yearMaxSlider.addEventListener('mouseup', () => { updateSliderZIndex(); });
 
     yearMinSlider.addEventListener('input', (e) => {
-        const newMin = parseInt(e.target.value);
-        yearMin = Math.min(newMin, yearMax);
+        yearMin = Math.min(parseInt(e.target.value), yearMax);
         yearMinLabel.textContent = yearMin;
         updateSliderZIndex();
         filterAndSort();
     });
 
     yearMaxSlider.addEventListener('input', (e) => {
-        const newMax = parseInt(e.target.value);
-        yearMax = Math.max(newMax, yearMin);
+        yearMax = Math.max(parseInt(e.target.value), yearMin);
         yearMaxLabel.textContent = yearMax;
         updateSliderZIndex();
         filterAndSort();
@@ -256,65 +236,46 @@ const publicationTypes = [...new Set(publicationsData.map(pub => pub.publication
 
     updateSliderZIndex();
 
-    // Card click to toggle abstract
     document.addEventListener('click', (e) => {
         const card = e.target.closest('.publication-card.has-abstract');
-        if (card) {
-            card.classList.toggle('expanded');
-        }
+        if (card) card.classList.toggle('expanded');
     });
 
     function filterAndSort() {
         const pubsArray = Array.from(publicationsData);
 
-        // Filter publications
         const filtered = pubsArray.filter(pub => {
             const year = parseInt(pub.dataset.year);
             const authorship = pub.dataset.authorship;
             const type = pub.dataset.type;
-            const title = pub.dataset.title;
-            const authors = pub.dataset.authors;
-            const journal = pub.dataset.journal;
-            const abstract = pub.dataset.abstract;
-            const searchText = title + ' ' + authors + ' ' + journal + ' ' + year + ' ' + abstract;
+            const searchText = pub.dataset.title + ' ' + pub.dataset.authors + ' ' + pub.dataset.journal + ' ' + year + ' ' + pub.dataset.abstract;
 
-            // Year filter
             if (year < yearMin || year > yearMax) return false;
 
-            // Authorship filter - combine first/last into "lead"
             if (currentAuthorship === 'lead') {
                 if (authorship !== 'first' && authorship !== 'last') return false;
             } else if (currentAuthorship !== 'all' && authorship !== currentAuthorship) {
                 return false;
             }
 
-            // Publication type filter
             if (currentType !== 'all' && type !== currentType) return false;
 
-            // Search filter - all keywords must match
             if (searchKeywords.length > 0) {
-                const allMatch = searchKeywords.every(keyword => searchText.includes(keyword));
-                if (!allMatch) return false;
+                if (!searchKeywords.every(keyword => searchText.includes(keyword))) return false;
             }
 
             return true;
         });
 
-        // Sort publications
         filtered.sort((a, b) => {
             switch (currentSort) {
-                case 'year-desc':
-                    return parseInt(b.dataset.year) - parseInt(a.dataset.year);
-                case 'year-asc':
-                    return parseInt(a.dataset.year) - parseInt(b.dataset.year);
-                case 'title':
-                    return a.dataset.title.localeCompare(b.dataset.title);
-                default:
-                    return 0;
+                case 'year-desc': return parseInt(b.dataset.year) - parseInt(a.dataset.year);
+                case 'year-asc': return parseInt(a.dataset.year) - parseInt(b.dataset.year);
+                case 'title': return a.dataset.title.localeCompare(b.dataset.title, 'zh-CN');
+                default: return 0;
             }
         });
 
-        // Update display
         const container = document.getElementById('publications-list');
         pubsArray.forEach(pub => {
             pub.style.display = 'none';
@@ -328,20 +289,16 @@ const publicationTypes = [...new Set(publicationsData.map(pub => pub.publication
             container.appendChild(pub);
         });
 
-        // Update count
         document.getElementById('results-count').textContent = filtered.length;
     }
 
-    // Controls toggle
-    const controlsToggle = document.getElementById('controls-toggle');
-    const controlsContainer = document.getElementById('controls-container');
-
-    controlsToggle.addEventListener('click', () => {
-        const isExpanded = controlsToggle.getAttribute('aria-expanded') === 'true';
-        controlsToggle.setAttribute('aria-expanded', !isExpanded);
-        controlsContainer.classList.toggle('collapsed');
+    document.getElementById('controls-toggle').addEventListener('click', () => {
+        const toggle = document.getElementById('controls-toggle');
+        const container = document.getElementById('controls-container');
+        const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
+        toggle.setAttribute('aria-expanded', String(!isExpanded));
+        container.classList.toggle('collapsed');
     });
 
-    // Apply initial sort and filter
     filterAndSort();
 </script>

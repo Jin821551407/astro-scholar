@@ -1,37 +1,28 @@
 // ============================================================================
-// Site Configuration
+// 站点配置
 // ============================================================================
-// This file contains the main configuration for your academic website.
-// Replace the example data with your own information to customize your site.
+// 在此填写你的个人信息，用于全站展示。
 
 export const SITE_DATA = {
-    // Your full name as you'd like it displayed
-    name: 'Dr. Beatrix Bumble',
+    // 显示名称
+    name: 'jin821551407',
 
-    // A brief tagline describing your role or expertise (3-5 words/phrases)
-    tagline: "Avian-Feline Fluff Dynamics | Lead Investigator",
+    // 一句话简介（首页与社交分享）
+    tagline: '全栈开发 · 开源爱好者 · 技术写作者',
 
-    // Social media handles (username only, not full URL)
-    // Set to empty string "" to hide an icon
-    twitter: "[your-twitter-handle]",  // bird logo → twitter.com
-    x: "",             // X logo → x.com
-
-    // Bluesky handle (without the @)
+    // 社交媒体用户名（不含 URL，留空 "" 则隐藏对应图标）
+    twitter: "",
+    x: "",
     bluesky: "",
-    linkedin: "[your-linkedin-template]",
-    github: "whydevils",
+    linkedin: "",
+    github: "jin821551407",
 
-    // Google Scholar ID (found in your Scholar profile URL)
-    // Example: https://scholar.google.com/citations?user=YOUR_ID_HERE
-    scholar: "[your-scholar-id]",
+    // 学术/Google Scholar（程序员博客一般留空）
+    scholar: "",
 
-    // Your email address (use [at] and [dot] to avoid spam bots)
-    email: "[your-email-address]",
+    email: "your-email@example.com",
 
-    // One-line research tagline used for SEO and social sharing meta tags
-    description: "Your one-line research tagline for SEO and social sharing.",
+    description: "一名程序员的个人博客，记录项目、技术分享与开发笔记。",
 
-    // Base URL of your deployed site (no trailing slash), e.g. "https://your-username.github.io"
-    // Used for Open Graph tags. Leave empty if you haven't deployed yet.
-    siteUrl: "https://whydevils.github.io/astro-scholar/",
+    siteUrl: "https://jin821551407.github.io/astro-scholar/",
 };
