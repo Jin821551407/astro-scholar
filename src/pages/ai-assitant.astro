@@ -1,14 +1,23 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { AiChat } from './components/AiChat';
 ---
 
-<Layout pageTitle="AI 助手">
+<Layout pageTitle="工坊向导 | Jinyu Workstation">
   <div class="ai-container">
-    <h1>🤖 开发助手</h1>
-    <p>你好！关于我的项目、技术栈或博客内容，都可以在这里提问～</p>
+    <!-- 更新标题和图标，增加工坊的氛围感 -->
+    <h1>🧭 工坊向导</h1>
     
-    <!-- 这里稍后会放入你的 AI 聊天组件 -->
-    <div id="chat-interface"></div>
+    <!-- 优化文案，让访客感觉像是在和一个专属系统交互 -->
+    <p class="welcome-text">
+      你好，访客！我是阿劲的数字工坊向导。<br />
+      关于工坊里的项目、技术栈或是博客内容，有任何好奇的地方，随时向我提问吧～
+    </p>
+    
+    <!-- 聊天界面容器 -->
+    <div id="chat-interface" class="mt-8">
+      <AiChat client:load />
+    </div>
   </div>
 </Layout>
 
@@ -18,5 +27,19 @@ import Layout from '../layouts/Layout.astro';
     margin: 0 auto;
     padding: 2rem;
     text-align: center;
+  }
+
+  /* 给欢迎文案加一点样式，让它看起来更柔和 */
+  .welcome-text {
+    color: #666; /* 根据你的博客主题调整颜色 */
+    line-height: 1.8;
+    font-size: 1.1rem;
+    margin-top: 0.5rem;
+  }
+
+  /* 确保聊天组件有足够的空间展示 */
+  #chat-interface {
+    min-height: 500px; 
+    margin-top: 2rem;
   }
 </style>

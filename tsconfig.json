@@ -1,4 +1,3 @@
-// Configuration for TypeScript
 {
   "extends": "astro/tsconfigs/strict",
   "include": [
@@ -7,5 +6,9 @@
   ],
   "exclude": [
     "dist"
-  ]
+  ],
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "jsxImportSource": "react"
+  }
 }

@@ -5,7 +5,7 @@
 
 export const SITE_DATA = {
     // 显示名称
-    name: 'jin821551407',
+    name: '阿劲的数字工坊',
 
     // 一句话简介（首页与社交分享）
     tagline: '全栈开发 · 开源爱好者 · 技术写作者',

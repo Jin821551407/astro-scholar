@@ -29,7 +29,15 @@
     "deploy": "astro build && npx gh-pages -d dist -b gh-pages --dotfiles --dotfiles"
   },
   "dependencies": {
-    "astro": "^6.1.9"
+    "@ai-sdk/react": "^3.0.195",
+    "@astrojs/react": "^5.0.7",
+    "@coze/web-sdk": "^0.0.5",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "astro": "^6.1.9",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
+    "streamdown": "^2.5.0"
   },
   "devDependencies": {
     "gh-pages": "^6.3.0"

@@ -2,116 +2,193 @@
 import Layout from '../layouts/Layout.astro';
 ---
 
-<Layout pageTitle="技术分享">
-    <div class="page-container">
-        <h1>技术分享</h1>
+<Layout pageTitle="技术分享 | 阿劲的数字工坊">
+  <div class="page-container talks-page">
+    <!-- 头部区域 -->
+    <header class="talks-header">
+      <h1>🎙️ 技术分享</h1>
+      <p class="intro-text">
+        这里是我的“数字会客厅”。未来会在这里记录 Meetup、团队内部分享与线上直播的干货。<br />
+        目前会议室正在布置中，茶水已备好，只等干货上场！
+      </p>
+    </header>
 
-        <p class="intro-text">
-            在技术 meetup、团队内部分享与线上直播中，记录一些我认为值得反复讨论的主题。
-            Slides 与回放链接会在活动后陆续补充。
-        </p>
+    <!-- 核心区域：白板占位符 -->
+    <div class="whiteboard-container">
+      <div class="whiteboard">
+        <div class="board-header">
+          <span class="icon">📅</span>
+          <span class="title">下一场 Meetup</span>
+        </div>
 
-        <section>
-            <h2>主题演讲</h2>
-            <ul class="custom-list">
-                <li>
-                    <span class="list-item-title">
-                        从学术模板到程序员博客：Astro 站点改造实践
-                    </span>
-                    <span class="list-item-description">
-                        前端技术沙龙 · 线上，2026
-                        <span class="extra-links">
-                            分享如何将 Astro 学术站点模板改造为个人技术博客，涵盖路由规划、数据层设计与 GitHub Pages 部署踩坑
-                        </span>
-                    </span>
-                </li>
-                <li>
-                    <span class="list-item-title">
-                        静态站点也能很现代：Astro + Islands 架构入门
-                    </span>
-                    <span class="list-item-description">
-                        开源技术大会 · 杭州，2025
-                        <span class="extra-links">
-                            介绍 Astro 的 Islands 架构、与 SPA 框架的取舍，以及个人博客/文档站点的最佳实践
-                        </span>
-                    </span>
-                </li>
-            </ul>
-        </section>
-
-        <section>
-            <h2>Meetup & 会议</h2>
-            <ul class="custom-list">
-                <li>
-                    <span class="list-item-title">
-                        TypeScript 类型体操：从入门到能读库源码
-                    </span>
-                    <span class="list-item-description">TypeScript 中文社区 Meetup · 上海，2025</span>
-                </li>
-                <li>
-                    <span class="list-item-title">
-                        GitHub Actions 自动化部署流水线实战
-                    </span>
-                    <span class="list-item-description">DevOps 实践分享会 · 北京，2024</span>
-                </li>
-                <li>
-                    <span class="list-item-title">
-                        前端性能优化：Core Web Vitals 实战清单
-                    </span>
-                    <span class="list-item-description">Web 性能优化 Workshop · 深圳，2024</span>
-                </li>
-                <li>
-                    <span class="list-item-title">
-                        CLI 工具开发：用 Node.js 提升日常效率
-                    </span>
-                    <span class="list-item-description">Node.js 技术日 · 线上，2023</span>
-                </li>
-                <li>
-                    <span class="list-item-title">
-                        开源贡献指南：如何发起你的第一个 PR
-                    </span>
-                    <span class="list-item-description">开源之夏校园行 · 广州，2023</span>
-                </li>
-            </ul>
-        </section>
-
-        <section>
-            <h2>团队内部分享</h2>
-            <ul class="custom-list">
-                <li>
-                    <span class="list-item-title">
-                        Monorepo 工程化实践：pnpm workspace 踩坑记录
-                    </span>
-                    <span class="list-item-description">
-                        团队技术周 · 2025
-                        <span class="extra-links">
-                            分享多包仓库的依赖管理、构建缓存与 CI 配置经验
-                        </span>
-                    </span>
-                </li>
-                <li>
-                    <span class="list-item-title">
-                        Code Review 文化：如何写出有建设性的评论
-                    </span>
-                    <span class="list-item-description">
-                        研发团队内训 · 2024
-                        <span class="extra-links">
-                            结合真实案例讨论 CR 流程、沟通技巧与自动化检查的配合
-                        </span>
-                    </span>
-                </li>
-                <li>
-                    <span class="list-item-title">
-                        个人知识管理：从碎片笔记到可检索的技术资产
-                    </span>
-                    <span class="list-item-description">
-                        新人 onboarding 系列 · 2023
-                        <span class="extra-links">
-                            介绍 Markdown 笔记、标签体系与博客输出的工作流
-                        </span>
-                    </span>
-                </li>
-            </ul>
-        </section>
+        <div class="board-content">
+          <!-- 黄色便签纸效果 -->
+          <div class="sticky-note">
+            <div class="tape"></div> <!-- 透明胶带装饰 -->
+            <h3>🚧 筹备中...</h3>
+            <p>
+              阿劲正在疯狂打磨 Slides 与实战代码。<br />
+              座位已经留好，敬请期待！
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
+
+    <!-- 互动区：留言催更 -->
+    <div class="interaction-area">
+      <h3>💬 你想听什么主题？</h3>
+      <p>
+        欢迎在下方留言，或者通过邮件告诉我，我来安排下一场分享！<br />
+        <a href="mailto:your-email@example.com" class="action-link">给我发邮件</a>
+        <span class="separator">或</span>
+        <a href="/guestbook" class="action-link">去留言板</a>
+      </p>
+    </div>
+  </div>
 </Layout>
+
+<style>
+  /* 页面整体容器微调 */
+  .talks-page {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 4rem 1.5rem;
+  }
+
+  /* 头部样式 */
+  .talks-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .talks-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+
+  .intro-text {
+    color: #666;
+    line-height: 1.8;
+    font-size: 1.1rem;
+  }
+
+  /* --- 白板容器 (拟物化卡片) --- */
+  .whiteboard-container {
+    margin-bottom: 3rem;
+    perspective: 1000px; /* 增加一点3D透视感 */
+  }
+
+  .whiteboard {
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow:
+      0 4px 6px -1px rgba(0, 0, 0, 0.1),
+      0 10px 15px -3px rgba(0, 0, 0, 0.1),
+      0 0 0 1px rgba(0, 0, 0, 0.05); /* 极细边框 */
+    overflow: hidden;
+    transition: transform 0.3s ease;
+  }
+
+  .whiteboard:hover {
+    transform: translateY(-2px); /* 悬浮微动效 */
+  }
+
+  /* 白板顶部栏 */
+  .board-header {
+    background: #f8fafc;
+    border-bottom: 1px solid #e2e8f0;
+    padding: 0.75rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+    color: #475569;
+    font-size: 0.9rem;
+  }
+
+  .board-content {
+    padding: 3rem 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 200px;
+    background-image: radial-gradient(#e5e7eb 1px, transparent 1px); /* 点阵背景，像笔记本 */
+    background-size: 20px 20px;
+  }
+
+  /* --- 黄色便签纸 (Sticky Note) --- */
+  .sticky-note {
+    background-color: #fef08a; /* 经典的黄色便签色 */
+    color: #422006;
+    padding: 1.5rem 2rem;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.15);
+    transform: rotate(-2deg); /* 微微倾斜，更自然 */
+    position: relative;
+    font-family: 'Comic Sans MS', 'Chalkboard SE', sans-serif; /* 手写风格字体 */
+  }
+
+  .sticky-note h3 {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    font-size: 1.25rem;
+  }
+
+  .sticky-note p {
+    margin: 0;
+    line-height: 1.6;
+    font-size: 1rem;
+  }
+
+  /* 透明胶带装饰 */
+  .tape {
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 25px;
+    background-color: rgba(255, 255, 255, 0.4);
+    border-left: 1px dashed rgba(255, 255, 255, 0.5);
+    border-right: 1px dashed rgba(255, 255, 255, 0.5);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  }
+
+  /* --- 底部互动区 --- */
+  .interaction-area {
+    text-align: center;
+    padding: 2rem;
+    background: #f1f5f9;
+    border-radius: 8px;
+  }
+
+  .interaction-area h3 {
+    margin-top: 0;
+    color: #334155;
+  }
+
+  .action-link {
+    color: #2563eb;
+    text-decoration: none;
+    font-weight: 500;
+    border-bottom: 1px dashed #2563eb;
+    transition: all 0.2s;
+  }
+
+  .action-link:hover {
+    background: #2563eb;
+    color: white;
+    border-bottom-style: solid;
+  }
+
+  .separator {
+    margin: 0 0.5rem;
+    color: #94a3b8;
+  }
+</style>
