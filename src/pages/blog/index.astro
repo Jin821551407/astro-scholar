@@ -1,6 +1,5 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import '../../styles/blog.css';
 
 interface Post {
     title: string;
@@ -23,68 +22,239 @@ const allTags = [...new Set(sorted.flatMap(p => p.tags ?? []))].sort();
 
 function formatDate(dateStr: string) {
     return new Date(dateStr).toLocaleDateString('zh-CN', {
-        day: 'numeric',
-        month: 'long',
         year: 'numeric',
+        month: 'short', // 使用短月份更省空间，如 "3月"
+        day: 'numeric',
     });
 }
 ---
 
-<Layout pageTitle="博客">
-    <div class="page-container">
-        <h1>博客</h1>
+<Layout pageTitle="探索笔记 | 阿劲的数字工坊">
+  <div class="page-container">
+    <header class="notes-header">
+      <h1>📝 探索笔记</h1>
+      <p class="intro-text">
+        记录未经验证的想法、踩坑实录与灵光一闪的瞬间。<br>
+        相比于完美的教程，这里只保留最真实的探索过程。
+      </p>
+    </header>
 
-        <p class="intro-text">
-            记录开发笔记、踩坑总结与偶尔的技术思考。
-            主题涵盖前端工程化、开源项目与工具链实践。
-        </p>
+    <!-- 标签过滤区 -->
+    <nav class="tag-nav">
+      <button class="tag-btn active" data-tag="all">全部</button>
+      {allTags.map(tag => (
+        <button class="tag-btn" data-tag={tag}>{tag}</button>
+      ))}
+    </nav>
 
-        <div class="blog-tag-filters">
-            <button class="blog-tag-btn active" data-tag="all">全部</button>
-            {allTags.map(tag => (
-                <button class="blog-tag-btn" data-tag={tag}>{tag}</button>
-            ))}
-        </div>
+    <!-- 瀑布流/网格区域 -->
+    <div class="notes-grid" id="notes-grid">
+      {sorted.map(post => (
+        <a href={post.url} class="note-card" data-tags={JSON.stringify(post.tags ?? [])}>
+          <div class="card-meta">
+            <time class="date">{formatDate(post.date)}</time>
+            <div class="tags-row">
+              {post.tags?.map(tag => (
+                <span class={`mini-tag ${tag.toLowerCase().includes('bug') ? 'is-bug' : tag.toLowerCase().includes('idea') ? 'is-idea' : ''}`}>
+                  #{tag}
+                </span>
+              ))}
+            </div>
+          </div>
 
-        <div class="blog-grid" id="blog-grid">
-            {sorted.map(post => (
-                <a href={post.url} class="blog-card" data-tags={JSON.stringify(post.tags ?? [])}>
-                    <div class="blog-card-inner">
-                        <span class="blog-card-date">{formatDate(post.date)}</span>
-                        <div>
-                            <h2 class="blog-card-title">{post.title}</h2>
-                            {post.description && (
-                                <p class="blog-card-description">{post.description}</p>
-                            )}
-                            {post.tags && (
-                                <div class="blog-card-tags">
-                                    {post.tags.map((tag: string) => (
-                                        <span class="tag">{tag}</span>
-                                    ))}
-                                </div>
-                            )}
-                        </div>
-                    </div>
-                </a>
-            ))}
-        </div>
+          <h2 class="card-title">{post.title}</h2>
+
+          {post.description && (
+            <p class="card-desc">{post.description}</p>
+          )}
+        </a>
+      ))}
     </div>
+  </div>
 </Layout>
 
+<style>
+  /* --- 页面容器 --- */
+  .page-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 4rem 1.5rem;
+    font-family: system-ui, -apple-system, sans-serif;
+  }
+
+  .notes-header {
+    border: none;
+    padding-bottom: 0;
+  }
+
+  /* --- 头部 --- */
+  .notes-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: #1a1a1a;
+  }
+  .intro-text {
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 0;
+    font-size: 1.1rem;
+  }
+
+  /* --- 标签导航 (Flex 布局) --- */
+  .tag-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-top: 2rem;
+    margin-bottom: 3rem;
+    justify-content: flex-start;
+  }
+
+ /* --- 标签按钮基础样式 --- */
+.tag-btn {
+    background: transparent;
+    border: 1px solid #e5e7eb; /* 极浅的灰色边框 */
+    padding: 0.4rem 1.2rem;
+    border-radius: 999px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    color: #6b7280; /* 中性灰文字 */
+    transition: all 0.2s ease;
+    font-weight: 500;
+}
+
+/* 悬停效果 - 轻微加深 */
+.tag-btn:hover {
+    border-color: #9ca3af;
+    color: #374151;
+    background-color: #f9fafb; /* 极淡的背景色 */
+}
+
+/* 激活状态 - 高级炭灰 */
+.tag-btn.active {
+    background: #1f2937; /* 深炭灰，接近黑色但有质感 */
+    border-color: #1f2937;
+    color: #ffffff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* 增加一点投影提升层次 */
+}
+
+  /* --- 网格布局 (核心修复) --- */
+  .notes-grid {
+    display: grid;
+    /* 自动填充，最小宽度 300px，防止手机上太窄 */
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+
+  /* --- 卡片样式 --- */
+  .note-card {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: inherit;
+    background: #fff;
+    border: 1px solid #eaeaea;
+    border-radius: 12px;
+    padding: 1.5rem;
+    transition: transform 0.2s, box-shadow 0.2s, opacity 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .note-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+    border-color: #d1d5db;
+  }
+
+  /* 隐藏状态 (用于 JS 筛选) */
+  .note-card.hidden {
+    display: none; /* 或者用 opacity: 0; pointer-events: none; 如果你想保留占位 */
+  }
+
+  /* 卡片内部排版 */
+  .card-meta {
+    margin-bottom: 0.5rem;
+    font-size: 0.85rem;
+  }
+
+  .date {
+    color: #999;
+    font-weight: 500;
+    text-wrap: nowrap;
+  }
+
+  .card-title {
+    font-size: 1.25rem;
+    margin: 0 0 0.8rem 0;
+    line-height: 1.4;
+    color: #222;
+    font-weight: 700;
+  }
+
+  .card-desc {
+    font-size: 0.95rem;
+    color: #666;
+    line-height: 1.6;
+    margin: 0;
+    /* 限制显示行数，保持卡片整齐 */
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /* --- 卡片内的小标签 --- */
+  .tags-row {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-top: 0.5rem;
+  }
+
+  .mini-tag {
+    background: #f3f4f6;
+    color: #6b7280;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+
+  /* 语义化颜色示例 */
+  .mini-tag.is-bug { background: #fee2e2; color: #ef4444; } /* 红色系 */
+  .mini-tag.is-idea { background: #d1fae5; color: #10b981; } /* 绿色系 */
+
+</style>
+
 <script>
-    const buttons = document.querySelectorAll<HTMLButtonElement>('.blog-tag-btn');
-    const cards = document.querySelectorAll<HTMLElement>('.blog-card');
+  const buttons = document.querySelectorAll<HTMLButtonElement>('.tag-btn');
+  const cards = document.querySelectorAll<HTMLElement>('.note-card');
 
-    buttons.forEach(btn => {
-        btn.addEventListener('click', () => {
-            buttons.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      // 1. 切换按钮状态
+      buttons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
 
-            const selected = btn.dataset.tag!;
-            cards.forEach(card => {
-                const tags: string[] = JSON.parse(card.dataset.tags ?? '[]');
-                card.style.display = (selected === 'all' || tags.includes(selected)) ? '' : 'none';
-            });
-        });
+      const selected = btn.dataset.tag!;
+
+      // 2. 筛选卡片
+      cards.forEach(card => {
+        const tags: string[] = JSON.parse(card.dataset.tags ?? '[]');
+        const isMatch = selected === 'all' || tags.includes(selected);
+
+        if (isMatch) {
+          card.classList.remove('hidden');
+          // 简单的淡入动画
+          card.animate([
+            { opacity: 0, transform: 'scale(0.95)' },
+            { opacity: 1, transform: 'scale(1)' }
+          ], { duration: 300, easing: 'ease-out' });
+        } else {
+          card.classList.add('hidden');
+        }
+      });
     });
+  });
 </script>
