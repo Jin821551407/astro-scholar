@@ -1,0 +1,49 @@
+<!DOCTYPE html><html lang="zh-CN"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v6.1.9"><title>阿劲的数字工坊 | 为什么程序员应该写博客</title><meta name="description" content="一名程序员的个人博客，记录项目、技术分享与开发笔记。"><meta property="og:title" content="阿劲的数字工坊 | 为什么程序员应该写博客"><meta property="og:description" content="一名程序员的个人博客，记录项目、技术分享与开发笔记。"><meta property="og:type" content="website"><script>
+			const theme = (() => {
+				if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+					return localStorage.getItem('theme');
+				}
+				if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+					return 'dark';
+				}
+				return 'light';
+			})();
+		
+			if (theme === 'light') {
+				document.documentElement.removeAttribute('data-theme');
+			} else {
+				document.documentElement.setAttribute('data-theme', 'dark');
+			}
+			window.localStorage.setItem('theme', theme);
+		</script><link rel="stylesheet" href="/_astro/BlogPost.NmAKRh5d.css">
+<link rel="stylesheet" href="/_astro/Layout.C8LNvTed.css"></head> <body> <header> <nav> <div class="nav-left"> <button aria-expanded="false" aria-controls="main-menu" class="menu-toggle" aria-label="打开菜单"> <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"> <line x1="3" y1="12" x2="21" y2="12"></line> <line x1="3" y1="6" x2="21" y2="6"></line> <line x1="3" y1="18" x2="21" y2="18"></line> </svg> </button> <div id="main-menu" class="navigation"> <button class="menu-close" aria-label="关闭菜单"> <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"> <line x1="18" y1="6" x2="6" y2="18"></line> <line x1="6" y1="6" x2="18" y2="18"></line> </svg> </button> <div class="nav-links"> <a href="/">🏠 工坊首页</a> <a href="/about/">👨‍💻 关于阿劲</a> <a href="/projects/">🛠️ 开源项目</a> <a href="/talks/">🎙️ 技术分享</a> <a href="/blog/">📝 探索笔记</a> <a href="/ai-assitant/">🧭 工坊向导</a> </div> </div> </div> <div class="nav-right"> <button id="theme-toggle" class="theme-toggle" aria-label="切换深色模式"> <svg class="sun" viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"> <circle cx="12" cy="12" r="5"></circle> <line x1="12" y1="1" x2="12" y2="3"></line> <line x1="12" y1="21" x2="12" y2="23"></line> <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line> <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line> <line x1="1" y1="12" x2="3" y2="12"></line> <line x1="21" y1="12" x2="23" y2="12"></line> <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line> <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line> </svg> <svg class="moon" viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"> <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path> </svg> </button> <script type="module">const a=()=>{const e=document.documentElement,t=e.getAttribute("data-theme")==="dark"?"light":"dark";t==="light"?e.removeAttribute("data-theme"):e.setAttribute("data-theme","dark"),localStorage.setItem("theme",t)};document.getElementById("theme-toggle")?.addEventListener("click",a);</script> </div> </nav> </header> <main>  <div class="page-container"> <div class="post-header"> <a href="/blog/" class="back-link">← 博客</a> <h1 class="post-title">为什么程序员应该写博客</h1> <div class="post-meta"> <time datetime="2025-11-08">2025年11月8日</time> <div class="post-tags"> <span class="tag">随笔</span><span class="tag">博客</span> </div> </div> <p class="post-description">写博客不是为了成为网红，而是逼自己把问题想清楚——以及几个降低启动成本的建议。</p> </div> <article class="post-body"> <p>我维护这个博客，最初只是为了有个地方放部署笔记。写着写着发现，<strong>输出本身就是最好的输入</strong>。</p>
+<h2 id="写博客的实际收益">写博客的实际收益</h2>
+<ol>
+<li><strong>倒逼理解</strong>：能写清楚，说明真的懂了。写不下去的地方，就是知识盲区。</li>
+<li><strong>可检索的外部记忆</strong>：半年后的自己会感谢现在的你留下搜索关键词。</li>
+<li><strong>建立技术品牌</strong>：不需要大 V 粉丝量，几个高质量文章 + GitHub 主页就够了。</li>
+<li><strong>面试时的差异化</strong>：「我写过这个主题的深入分析」比「我了解过」有说服力得多。</li>
+</ol>
+<h2 id="降低启动成本">降低启动成本</h2>
+<p>不必一开始就自建站点。路径可以是：</p>
+<ol>
+<li>先在掘金 / 知乎 / Medium 写几篇</li>
+<li>确认能持续输出后，再用 Astro / Hugo 等搭个人站</li>
+<li>把旧文章迁移过来，统一域名</li>
+</ol>
+<p>自建站的好处是<strong>完全掌控样式与数据</strong>，这个仓库就是例子——从模板改几份 JSON 和 Markdown 就能上线。</p>
+<h2 id="写什么">写什么</h2>
+<ul>
+<li>刚解决的一个 bug 及根因</li>
+<li>读完某文档后的笔记与踩坑</li>
+<li>Side project 的技术选型与反思</li>
+<li>对某工具/框架的对比评测</li>
+</ul>
+<p><strong>不需要每篇都是深度长文。</strong> 300 字的踩坑记录，对遇到同样问题的人价值很大。</p>
+<h2 id="我的原则">我的原则</h2>
+<ul>
+<li>只写自己真正做过或踩过的</li>
+<li>代码示例要能跑（或注明版本与环境）</li>
+<li>不追热点，但遇到值得记录的就写</li>
+</ul>
+<p>如果你也在考虑开博客：先写一篇，比想一百篇更重要。</p> </article> <div class="post-footer"> <a href="/blog/" class="back-link">← 返回全部文章</a> </div> </div>  </main> <div class="footer-container"> <div class="footer-content"> <div class="copyright">&copy; 2026 阿劲的数字工坊</div> <div class="social-icons footer-socials" style="gap:1.0rem">     <a href="https://github.com/jin821551407" aria-label="GitHub" target="_blank" rel="noopener noreferrer"> <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"> <path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.604-3.369-1.342-3.369-1.342-.454-1.154-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.579.688.481C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"></path> </svg> </a>  <a href="mailto:your-email@example.com" aria-label="电子邮件"> <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"> <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"></path> </svg> </a> </div> </div> </div> <script type="module">const t=document.querySelector(".menu-toggle"),s=document.querySelector(".menu-close"),a=document.querySelectorAll(".nav-links a"),n=()=>t?.setAttribute("aria-expanded","false");t?.addEventListener("click",()=>{const e=t.getAttribute("aria-expanded")==="true";t.setAttribute("aria-expanded",`${!e}`)});s?.addEventListener("click",n);a.forEach(e=>{e.addEventListener("click",n)});document.addEventListener("click",e=>{const c=e.target.closest(".navigation"),i=e.target.closest(".menu-toggle");!c&&!i&&t?.getAttribute("aria-expanded")==="true"&&n()});</script> </body> </html>

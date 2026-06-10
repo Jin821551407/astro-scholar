@@ -1,0 +1,69 @@
+<!DOCTYPE html><html lang="zh-CN"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v6.1.9"><title>阿劲的数字工坊 | 用 Astro 部署个人博客到 GitHub Pages</title><meta name="description" content="一名程序员的个人博客，记录项目、技术分享与开发笔记。"><meta property="og:title" content="阿劲的数字工坊 | 用 Astro 部署个人博客到 GitHub Pages"><meta property="og:description" content="一名程序员的个人博客，记录项目、技术分享与开发笔记。"><meta property="og:type" content="website"><script>
+			const theme = (() => {
+				if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+					return localStorage.getItem('theme');
+				}
+				if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+					return 'dark';
+				}
+				return 'light';
+			})();
+		
+			if (theme === 'light') {
+				document.documentElement.removeAttribute('data-theme');
+			} else {
+				document.documentElement.setAttribute('data-theme', 'dark');
+			}
+			window.localStorage.setItem('theme', theme);
+		</script><link rel="stylesheet" href="/_astro/BlogPost.NmAKRh5d.css">
+<link rel="stylesheet" href="/_astro/Layout.C8LNvTed.css"></head> <body> <header> <nav> <div class="nav-left"> <button aria-expanded="false" aria-controls="main-menu" class="menu-toggle" aria-label="打开菜单"> <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"> <line x1="3" y1="12" x2="21" y2="12"></line> <line x1="3" y1="6" x2="21" y2="6"></line> <line x1="3" y1="18" x2="21" y2="18"></line> </svg> </button> <div id="main-menu" class="navigation"> <button class="menu-close" aria-label="关闭菜单"> <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"> <line x1="18" y1="6" x2="6" y2="18"></line> <line x1="6" y1="6" x2="18" y2="18"></line> </svg> </button> <div class="nav-links"> <a href="/">🏠 工坊首页</a> <a href="/about/">👨‍💻 关于阿劲</a> <a href="/projects/">🛠️ 开源项目</a> <a href="/talks/">🎙️ 技术分享</a> <a href="/blog/">📝 探索笔记</a> <a href="/ai-assitant/">🧭 工坊向导</a> </div> </div> </div> <div class="nav-right"> <button id="theme-toggle" class="theme-toggle" aria-label="切换深色模式"> <svg class="sun" viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"> <circle cx="12" cy="12" r="5"></circle> <line x1="12" y1="1" x2="12" y2="3"></line> <line x1="12" y1="21" x2="12" y2="23"></line> <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line> <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line> <line x1="1" y1="12" x2="3" y2="12"></line> <line x1="21" y1="12" x2="23" y2="12"></line> <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line> <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line> </svg> <svg class="moon" viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"> <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path> </svg> </button> <script type="module">const a=()=>{const e=document.documentElement,t=e.getAttribute("data-theme")==="dark"?"light":"dark";t==="light"?e.removeAttribute("data-theme"):e.setAttribute("data-theme","dark"),localStorage.setItem("theme",t)};document.getElementById("theme-toggle")?.addEventListener("click",a);</script> </div> </nav> </header> <main>  <div class="page-container"> <div class="post-header"> <a href="/blog/" class="back-link">← 博客</a> <h1 class="post-title">用 Astro 部署个人博客到 GitHub Pages</h1> <div class="post-meta"> <time datetime="2026-03-15">2026年3月15日</time> <div class="post-tags"> <span class="tag">Astro</span><span class="tag">部署</span><span class="tag">GitHub Pages</span> </div> </div> <p class="post-description">从 base 路径、.nojekyll 到 gh-pages 分支，总结 Astro 静态站点部署 GitHub Pages 的完整流程与常见坑。</p> </div> <article class="post-body"> <p>把 Astro 博客部署到 GitHub Pages，看起来只需 <code>npm run build</code> 然后推送 <code>dist</code>，实际踩坑往往出在路径与 Jekyll 规则上。</p>
+<h2 id="关键配置">关键配置</h2>
+<p>在 <code>astro.config.mjs</code> 中，项目站（如 <code>username.github.io/repo-name</code>）需要正确设置：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="js"><code><span class="line"><span style="color:#F97583">export</span><span style="color:#F97583"> default</span><span style="color:#B392F0"> defineConfig</span><span style="color:#E1E4E8">({</span></span>
+<span class="line"><span style="color:#E1E4E8">  site: </span><span style="color:#9ECBFF">'https://your-username.github.io'</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">  base: </span><span style="color:#9ECBFF">'/repo-name/'</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">});</span></span></code></pre>
+<ul>
+<li><code>site</code> 只写域名，不带子路径</li>
+<li><code>base</code> 与仓库名一致</li>
+</ul>
+<h2 id="nojekyll-不能少">.nojekyll 不能少</h2>
+<p>GitHub Pages 默认启用 Jekyll，会<strong>忽略以下划线开头的目录</strong>。Astro 构建产物在 <code>_astro/</code> 下，缺少 <code>.nojekyll</code> 会导致 CSS 和图片全部 404。</p>
+<p>在 <code>public/.nojekyll</code> 放置空文件，构建时会复制到 <code>dist/</code>。若用 <code>gh-pages</code> 包部署，记得加 <code>--dotfiles</code> 参数。</p>
+<h2 id="本地预览">本地预览</h2>
+<p>不要用 Live Server 直接打开 <code>dist/index.html</code>。应使用：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">npm</span><span style="color:#9ECBFF"> run</span><span style="color:#9ECBFF"> build</span></span>
+<span class="line"><span style="color:#B392F0">npm</span><span style="color:#9ECBFF"> run</span><span style="color:#9ECBFF"> preview</span></span></code></pre>
+<p>访问带 <code>/repo-name/</code> 前缀的地址，才能正确加载静态资源。</p>
+<h2 id="部署命令">部署命令</h2>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">npm</span><span style="color:#9ECBFF"> run</span><span style="color:#9ECBFF"> deploy</span></span>
+<span class="line"><span style="color:#6A737D"># 等价于 astro build &#x26;&#x26; npx gh-pages -d dist -b gh-pages --dotfiles</span></span></code></pre>
+<p>推送完成后等待 1–3 分钟，访问 <code>https://username.github.io/repo-name/</code> 验证 <code>_astro</code> 资源是否可加载。</p>
+<h2 id="小结">小结</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>问题</th><th>原因</th><th>解决</th></tr></thead><tbody><tr><td>CSS 404</td><td>Jekyll 忽略 <code>_astro</code></td><td>添加 <code>.nojekyll</code></td></tr><tr><td>路径错误</td><td><code>base</code> 与仓库名不一致</td><td>检查 <code>astro.config.mjs</code></td></tr><tr><td>Live Server 404</td><td>服务器根目录不对</td><td>使用 <code>astro preview</code></td></tr></tbody></table>
+<p>部署成功后，就可以专注写博客内容了——当然，改配置花掉的时间也算「内容」的一部分。</p> </article> <div class="post-footer"> <a href="/blog/" class="back-link">← 返回全部文章</a> </div> </div>  </main> <div class="footer-container"> <div class="footer-content"> <div class="copyright">&copy; 2026 阿劲的数字工坊</div> <div class="social-icons footer-socials" style="gap:1.0rem">     <a href="https://github.com/jin821551407" aria-label="GitHub" target="_blank" rel="noopener noreferrer"> <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"> <path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.604-3.369-1.342-3.369-1.342-.454-1.154-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.579.688.481C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"></path> </svg> </a>  <a href="mailto:your-email@example.com" aria-label="电子邮件"> <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"> <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"></path> </svg> </a> </div> </div> </div> <script type="module">const t=document.querySelector(".menu-toggle"),s=document.querySelector(".menu-close"),a=document.querySelectorAll(".nav-links a"),n=()=>t?.setAttribute("aria-expanded","false");t?.addEventListener("click",()=>{const e=t.getAttribute("aria-expanded")==="true";t.setAttribute("aria-expanded",`${!e}`)});s?.addEventListener("click",n);a.forEach(e=>{e.addEventListener("click",n)});document.addEventListener("click",e=>{const c=e.target.closest(".navigation"),i=e.target.closest(".menu-toggle");!c&&!i&&t?.getAttribute("aria-expanded")==="true"&&n()});</script> </body> </html>
