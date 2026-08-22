@@ -91,10 +91,10 @@ function formatDate(dateStr: string) {
   .notes-header h1 {
     font-size: 2.5rem;
     margin-bottom: 1rem;
-    color: #1a1a1a;
+    color: var(--color-text);
   }
   .intro-text {
-    color: #666;
+    color: var(--color-text-muted);
     line-height: 1.6;
     margin-bottom: 0;
     font-size: 1.1rem;
@@ -113,29 +113,29 @@ function formatDate(dateStr: string) {
  /* --- 标签按钮基础样式 --- */
 .tag-btn {
     background: transparent;
-    border: 1px solid #e5e7eb; /* 极浅的灰色边框 */
+    border: 1px solid var(--color-border);
     padding: 0.4rem 1.2rem;
     border-radius: 999px;
     cursor: pointer;
     font-size: 0.9rem;
-    color: #6b7280; /* 中性灰文字 */
+    color: var(--color-text-muted);
     transition: all 0.2s ease;
     font-weight: 500;
 }
 
 /* 悬停效果 - 轻微加深 */
 .tag-btn:hover {
-    border-color: #9ca3af;
-    color: #374151;
-    background-color: #f9fafb; /* 极淡的背景色 */
+    border-color: var(--color-accent);
+    color: var(--color-text);
+    background-color: var(--color-bg-alt);
 }
 
 /* 激活状态 - 高级炭灰 */
 .tag-btn.active {
-    background: #1f2937; /* 深炭灰，接近黑色但有质感 */
-    border-color: #1f2937;
-    color: #ffffff;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* 增加一点投影提升层次 */
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+    color: var(--color-bg);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
   /* --- 网格布局 (核心修复) --- */
@@ -152,8 +152,8 @@ function formatDate(dateStr: string) {
     flex-direction: column;
     text-decoration: none;
     color: inherit;
-    background: #fff;
-    border: 1px solid #eaeaea;
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
     border-radius: 12px;
     padding: 1.5rem;
     transition: transform 0.2s, box-shadow 0.2s, opacity 0.3s;
@@ -164,7 +164,7 @@ function formatDate(dateStr: string) {
   .note-card:hover {
     transform: translateY(-4px);
     box-shadow: 0 10px 20px rgba(0,0,0,0.05);
-    border-color: #d1d5db;
+    border-color: var(--color-accent);
   }
 
   /* 隐藏状态 (用于 JS 筛选) */
@@ -179,7 +179,7 @@ function formatDate(dateStr: string) {
   }
 
   .date {
-    color: #999;
+    color: var(--color-text-muted);
     font-weight: 500;
     text-wrap: nowrap;
   }
@@ -188,13 +188,13 @@ function formatDate(dateStr: string) {
     font-size: 1.25rem;
     margin: 0 0 0.8rem 0;
     line-height: 1.4;
-    color: #222;
+    color: var(--color-text);
     font-weight: 700;
   }
 
   .card-desc {
     font-size: 0.95rem;
-    color: #666;
+    color: var(--color-text-muted);
     line-height: 1.6;
     margin: 0;
     /* 限制显示行数，保持卡片整齐 */
@@ -213,17 +213,17 @@ function formatDate(dateStr: string) {
   }
 
   .mini-tag {
-    background: #f3f4f6;
-    color: #6b7280;
+    background: var(--color-bg-alt);
+    color: var(--color-text-muted);
     padding: 2px 8px;
     border-radius: 4px;
     font-size: 0.75rem;
     font-weight: 600;
   }
 
-  /* 语义化颜色示例 */
-  .mini-tag.is-bug { background: #fee2e2; color: #ef4444; } /* 红色系 */
-  .mini-tag.is-idea { background: #d1fae5; color: #10b981; } /* 绿色系 */
+  /* 语义化颜色 - 使用 color-mix 适配主题 */
+  .mini-tag.is-bug { background: color-mix(in srgb, #ef4444 15%, transparent); color: #ef4444; }
+  .mini-tag.is-idea { background: color-mix(in srgb, #10b981 15%, transparent); color: #10b981; }
 
 </style>
 
